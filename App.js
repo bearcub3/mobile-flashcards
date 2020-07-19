@@ -1,21 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import styled from 'styled-components';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
+
+import reducer from './reducers';
+import middlewares from './middlewares';
+import { colors } from './utils/theme';
+
+import AppEntry from './components/AppEntry';
+
+const store = createStore(reducer, middlewares);
+
+function App() {
+	let [fontsLoaded] = useFonts({
+		'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
+		'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+		'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf')
+	});
+
+	if (!fontsLoaded) {
+		return <AppLoading />;
+	}
+
+	return (
+		<Provider store={store}>
+			<Container>
+				<AppEntry />
+			</Container>
+		</Provider>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Container = styled.View`
+	flex: 1;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+`;
+
+export default App;
