@@ -1,20 +1,14 @@
-import { getUserDecksData } from '../utils/api';
+import { getInitalData } from '../utils/api';
+import { getUserDecks } from './decks';
+import { getUserRecord } from './user';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
-export const GET_DECKS = 'GET_DECKS';
-
-function getUserDecks(decks) {
-	return {
-		type: GET_DECKS,
-		decks
-	};
-}
-
-export function handleUsersDecks() {
+export function handleUsersData() {
 	return (dispatch) => {
-		return getUserDecksData().then(({ decks }) => {
-			dispatch(showLoading());
+		dispatch(showLoading());
+		return getInitalData().then(({ decks, user }) => {
 			dispatch(getUserDecks(decks));
+			dispatch(getUserRecord(user));
 			dispatch(hideLoading());
 		});
 	};

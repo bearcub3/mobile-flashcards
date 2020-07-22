@@ -1,3 +1,15 @@
+let user = {
+	JavaScript: {
+		userAnswers: []
+	},
+	React: {
+		userAnswers: []
+	},
+	CSS: {
+		userAnswers: []
+	}
+};
+
 let decks = {
 	JavaScript: [
 		{
@@ -96,6 +108,37 @@ let decks = {
 
 export function _getDecksData() {
 	return new Promise((res, rej) => {
-		setTimeout(() => res({ ...decks }), 1000);
+		setTimeout(() => res({ ...decks }), 500);
 	});
 }
+
+export function _getUsersData() {
+	return new Promise((res, rej) => {
+		setTimeout(() => res({ ...user }), 500);
+	});
+}
+
+export function _saveUserAnswer({ category, userAnswers }) {
+	return new Promise((res, rej) => {
+		setTimeout(() => {
+			// call reducer
+			user = {
+				...user,
+				[category]: {
+					...user[category],
+					userAnswers: user[category].userAnswers.concat([userAnswers])
+				}
+			};
+
+			res();
+		}, 500);
+	});
+}
+
+// {
+// 	...state,
+// 	[answer.category]: {
+// 		...state[answer.category],
+// 		userAnswers: state[answer.category].userAnswers.concat([answer.userAnswers])
+// 	}
+// };

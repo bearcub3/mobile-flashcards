@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import { colors } from '../utils/theme';
 
 // Stack Navigation
-function CardDetail({ entryId, decks, navigation: { navigate } }) {
+function CardDetail({ entryId, decks, resumePoint, navigation: { navigate } }) {
+	console.log(navigate);
 	return (
 		<Container>
 			<CardCategory>{entryId}</CardCategory>
@@ -18,9 +19,9 @@ function CardDetail({ entryId, decks, navigation: { navigate } }) {
 					<ButtonText>Add Card</ButtonText>
 				</Button>
 			</TouchableOpacity>
-			<TouchableOpacity onPress={() => navigate('StartQuiz')}>
+			<TouchableOpacity onPress={() => navigate('StartQuiz', { entryId: entryId })}>
 				<Button color={colors.blue}>
-					<ButtonText>Start Quiz</ButtonText>
+					<ButtonText>{resumePoint > 0 ? 'Resume Quiz' : 'Start Quiz'}</ButtonText>
 				</Button>
 			</TouchableOpacity>
 		</Container>
@@ -64,11 +65,12 @@ const BoldText = styled.Text`
 	font-weight: bold;
 `;
 
-function mapStateToProps({ decks }, { route }) {
+function mapStateToProps({ decks, user }, { route }) {
 	const { entryId } = route.params;
 	return {
 		entryId,
-		decks
+		decks,
+		resumePoint: user[entryId].userAnswers.length
 	};
 }
 

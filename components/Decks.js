@@ -1,15 +1,23 @@
-import React from 'react';
-import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View, ScrollView, AsyncStorage } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { colors } from '../utils/theme';
+import { setBasicDecks, fetchDecksData, setUserRecord, fetchUserData } from '../utils/api';
 
-function Decks({ totalDecks, decks, navigation: { navigate } }) {
+function Decks({ totalDecks, decks, user, navigation: { navigate } }) {
+	useEffect(() => {
+		setBasicDecks({ decks });
+		fetchDecksData();
+		setUserRecord({ user });
+		fetchUserData();
+	}, [decks, user]);
+
 	return (
 		<ScrollView style={{ backgroundColor: `${colors.white}` }} stickyHeaderIndices={[0]}>
 			<Landing>
-				<Intro> Dev Quiz</Intro>
+				<Intro>Dev Quiz</Intro>
 				<Header>Take your dev knowledge to the next level!</Header>
 			</Landing>
 			<DeckContainer>
@@ -91,19 +99,12 @@ const Bold = styled.Text`
 	font-weight: bold;
 `;
 
-function mapStateToProps({ decks }) {
+function mapStateToProps({ decks, user }) {
 	return {
 		decks,
+		user,
 		totalDecks: Object.keys(decks)
 	};
 }
-
-// function mapDispatchToProps(dispatch, { route, navigation }) {
-// 	const { entryId } = route.params;
-
-// 	return {
-// 		goBack: () => navigation.goBack
-// 	};
-// }
 
 export default connect(mapStateToProps)(Decks);

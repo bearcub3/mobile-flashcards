@@ -1,7 +1,65 @@
-import { _getDecksData } from './data';
+import { _getDecksData, _getUsersData, _saveUserAnswer } from './data';
+import { AsyncStorage } from 'react-native';
 
-export function getUserDecksData() {
-	return Promise.all([_getDecksData()]).then(([decks]) => ({
-		decks
+export const DEV_QUIZ_STORAGE_KEY = 'DEV_QUIZ:QUIZZES';
+export const USER_RECORD_STORAGE_KEY = 'USER_RECORD_STORAGE_KEY';
+
+export function getInitalData() {
+	return Promise.all([_getDecksData(), _getUsersData()]).then(([decks, user]) => ({
+		decks,
+		user
 	}));
+}
+
+export function saveUserAnswer(info) {
+	return _saveUserAnswer(info);
+}
+
+export function setBasicDecks(decks) {
+	return AsyncStorage.setItem(DEV_QUIZ_STORAGE_KEY, JSON.stringify(decks));
+}
+
+export function setUserRecord(user) {
+	return AsyncStorage.setItem(USER_RECORD_STORAGE_KEY, JSON.stringify(user));
+}
+
+export function fetchDecksData() {
+	return AsyncStorage.getItem(DEV_QUIZ_STORAGE_KEY).then((results) => {
+		const data = JSON.parse(results);
+		return data;
+	});
+}
+
+export function fetchUserData() {
+	return AsyncStorage.getItem(USER_RECORD_STORAGE_KEY).then((results) => {
+		const data = JSON.parse(results);
+		return data;
+	});
+}
+
+export function submitNewDeck({ entry, key }) {
+	return AsyncStorage.mergeItem(
+		DEV_QUIZ_STORAGE_KEY,
+		JSON.stringify({
+			[key]: [entry]
+		})
+	);
+}
+
+export function submitUserAnswer({ entry, key }) {
+	return AsyncStorage.mergeItem(
+		USER_RECORD_STORAGE_KEY,
+		JSON.stringify({
+			[key]: [entry]
+		})
+	);
+}
+
+export function addCardData({ entry, key }) {
+	return AsyncStorage.mergeItem(
+		DEV_QUIZ_STORAGE_KEY,
+		JSON.stringify({
+			[key]: entry
+		})
+	);
 }

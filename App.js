@@ -9,7 +9,6 @@ import { AppLoading } from 'expo';
 
 import reducer from './reducers';
 import middlewares from './middlewares';
-import { colors } from './utils/theme';
 
 import AppEntry from './components/AppEntry';
 

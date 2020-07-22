@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, SafeAreaView, StatusBar, Platform } from 'react-native';
+import { Text, View, SafeAreaView, StatusBar, Platform, AsyncStorage } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,7 +9,7 @@ import Constants from 'expo-constants';
 
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
-import { handleUsersDecks } from '../actions';
+import { handleUsersData } from '../actions';
 import { colors } from '../utils/theme';
 
 import Decks from './Decks';
@@ -84,13 +84,20 @@ const CardStackNav = () => (
 				headerStyle: { backgroundColor: colors.black }
 			}}
 		/>
-		<Stack.Screen name="AddCard" component={AddCard} />
+		<Stack.Screen
+			name="AddCard"
+			component={AddCard}
+			options={{
+				headerTintColor: colors.white,
+				headerStyle: { backgroundColor: colors.black }
+			}}
+		/>
 		<Stack.Screen
 			name="StartQuiz"
 			component={Quiz}
 			options={{
-				headerTintColor: colors.black,
-				headerStyle: { backgroundColor: colors.white }
+				headerTintColor: colors.white,
+				headerStyle: { backgroundColor: colors.blue }
 			}}
 		/>
 	</Stack.Navigator>
@@ -98,8 +105,9 @@ const CardStackNav = () => (
 
 function AppEntry({ dispatch }) {
 	useEffect(() => {
-		dispatch(handleUsersDecks());
+		dispatch(handleUsersData());
 	}, [dispatch]);
+
 	return (
 		<NavigationContainer>
 			<FlashCardStatusBar backgroundColor={colors.black} barStyle="light-content" />
