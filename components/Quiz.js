@@ -1,5 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, Alert, Dimensions } from 'react-native';
+import {
+	Text,
+	View,
+	TouchableOpacity,
+	TouchableHighlight,
+	Alert,
+	Dimensions,
+	Modal
+} from 'react-native';
 import { connect } from 'react-redux';
 import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components';
@@ -8,11 +16,19 @@ import { colors } from '../utils/theme';
 import { handleSaveUserAnswer } from '../actions/user';
 import { submitUserAnswer } from '../utils/api';
 
+import QuizResult from './QuizResult';
+
 function Quiz({ dispatch, deck, category, answered }) {
 	const screenWidth = Math.round(Dimensions.get('window').width);
 	const carousel = useRef();
-
 	const [currentCategory] = useState(category);
+	const [modalVisible, setModalVisible] = useState(false);
+
+	const handleModalVisiblity = (param) => {
+		setModalVisible(param);
+	};
+
+	const [isCompleted, setCompletion] = useState(false);
 
 	const QuizDeck = ({ item, index }) => (
 		<Wrapper>
@@ -28,6 +44,23 @@ function Quiz({ dispatch, deck, category, answered }) {
 						(answered[index] !== undefined && true) || (answered[index] > idx && false)
 					}
 					onPress={() => {
+						if (answered.length !== index) {
+							Alert.alert(
+								`Answer the previous quiz first!`,
+								``,
+								[
+									{
+										text: 'OK',
+										onPress: () => {
+											carousel.current.snapToPrev();
+										}
+									}
+								],
+								{ cancelable: false }
+							);
+							return;
+						}
+
 						dispatch(
 							handleSaveUserAnswer({
 								category: currentCategory,
@@ -35,7 +68,14 @@ function Quiz({ dispatch, deck, category, answered }) {
 							})
 						);
 						submitUserAnswer({ currentCategory, idx });
-						//carousel.current.snapToNext();
+
+						if (deck.length === answered.length + 1) {
+							setCompletion(!isCompleted);
+							handleModalVisiblity(!modalVisible);
+							return;
+						}
+
+						carousel.current.snapToNext();
 					}}
 					style={answered[index] === idx && { backgroundColor: `${colors.yellow}` }}
 				>
@@ -43,8 +83,26 @@ function Quiz({ dispatch, deck, category, answered }) {
 				</Options>
 			))}
 			<Answer
+				disabled={isCompleted}
 				onPress={() => {
-					const hasChcked = 5;
+					const hasChecked = 5;
+					if (answered.length !== index) {
+						Alert.alert(
+							`Answer the previous quiz first!`,
+							``,
+							[
+								{
+									text: 'OK',
+									onPress: () => {
+										carousel.current.snapToPrev();
+									}
+								}
+							],
+							{ cancelable: false }
+						);
+						return;
+					}
+
 					Alert.alert(
 						`${item.answer + 1}`,
 						`The correct answer`,
@@ -59,10 +117,10 @@ function Quiz({ dispatch, deck, category, answered }) {
 									dispatch(
 										handleSaveUserAnswer({
 											category: currentCategory,
-											userAnswers: hasChcked
+											userAnswers: hasChecked
 										})
 									);
-									submitUserAnswer({ currentCategory, hasChcked });
+									submitUserAnswer({ currentCategory, hasChecked });
 									carousel.current.snapToNext();
 								}
 							}
@@ -87,16 +145,23 @@ function Quiz({ dispatch, deck, category, answered }) {
 				layout={'default'}
 				layoutCardOffset={15}
 			/>
+			<QuizResult
+				category={category}
+				handleModal={handleModalVisiblity}
+				modalVisible={modalVisible}
+			/>
 		</Container>
 	);
 }
 
 function mapStateToProps({ decks, user }, { route }) {
-	const { entryId } = route.params;
+	const { entryId, handleModal, modalVisible } = route.params;
 	return {
 		category: entryId,
 		deck: decks[entryId],
-		answered: user[entryId].userAnswers
+		answered: user[entryId].userAnswers,
+		handleModal,
+		modalVisible
 	};
 }
 

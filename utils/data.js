@@ -134,11 +134,3 @@ export function _saveUserAnswer({ category, userAnswers }) {
 		}, 500);
 	});
 }
-
-// {
-// 	...state,
-// 	[answer.category]: {
-// 		...state[answer.category],
-// 		userAnswers: state[answer.category].userAnswers.concat([answer.userAnswers])
-// 	}
-// };

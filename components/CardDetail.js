@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -7,7 +7,8 @@ import { colors } from '../utils/theme';
 
 // Stack Navigation
 function CardDetail({ entryId, decks, resumePoint, navigation: { navigate } }) {
-	console.log(navigate);
+	const currentValue = useRef();
+
 	return (
 		<Container>
 			<CardCategory>{entryId}</CardCategory>
@@ -19,9 +20,21 @@ function CardDetail({ entryId, decks, resumePoint, navigation: { navigate } }) {
 					<ButtonText>Add Card</ButtonText>
 				</Button>
 			</TouchableOpacity>
-			<TouchableOpacity onPress={() => navigate('StartQuiz', { entryId: entryId })}>
+			<TouchableOpacity
+				onPress={() =>
+					navigate('StartQuiz', {
+						entryId: entryId
+					})
+				}
+			>
 				<Button color={colors.blue}>
-					<ButtonText>{resumePoint > 0 ? 'Resume Quiz' : 'Start Quiz'}</ButtonText>
+					<ButtonText ref={currentValue}>
+						{resumePoint > 0
+							? resumePoint === decks[entryId].length
+								? 'View Result'
+								: 'Resume Quiz'
+							: 'Start Quiz'}
+					</ButtonText>
 				</Button>
 			</TouchableOpacity>
 		</Container>
