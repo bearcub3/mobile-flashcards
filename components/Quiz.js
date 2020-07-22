@@ -30,6 +30,13 @@ function Quiz({ dispatch, deck, category, answered }) {
 
 	const [isCompleted, setCompletion] = useState(false);
 
+	useEffect(() => {
+		if (answered.length === deck.length) {
+			setCompletion(true);
+			handleModalVisiblity(true);
+		}
+	}, [answered]);
+
 	const QuizDeck = ({ item, index }) => (
 		<Wrapper>
 			<Pagination>
@@ -83,7 +90,7 @@ function Quiz({ dispatch, deck, category, answered }) {
 				</Options>
 			))}
 			<Answer
-				disabled={isCompleted}
+				disabled={isCompleted && true}
 				onPress={() => {
 					const hasChecked = 5;
 					if (answered.length !== index) {
