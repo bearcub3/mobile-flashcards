@@ -1,3 +1,5 @@
+/* @flow */
+
 let user = {
 	JavaScript: {
 		userAnswers: []
@@ -107,19 +109,25 @@ let decks = {
 };
 
 export function _getDecksData() {
-	return new Promise((res, rej) => {
-		setTimeout(() => res({ ...decks }), 500);
+	return new Promise<void>((res, rej) => {
+		setTimeout(() => res(({ ...decks }: Object)), 500);
 	});
 }
 
 export function _getUsersData() {
-	return new Promise((res, rej) => {
-		setTimeout(() => res({ ...user }), 500);
+	return new Promise<void>((res, rej) => {
+		setTimeout(() => res(({ ...user }: Object)), 500);
 	});
 }
 
-export function _saveUserAnswer({ category, userAnswers }) {
-	return new Promise((res, rej) => {
+export function _saveUserAnswer({
+	category,
+	userAnswers
+}: {
+	category: string,
+	userAnswers: number
+}) {
+	return new Promise<void>((res, rej) => {
 		setTimeout(() => {
 			// call reducer
 			user = {

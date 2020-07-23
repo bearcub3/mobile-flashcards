@@ -1,13 +1,22 @@
-import { GET_USER, SUBMIT_USER_ANSWER } from '../actions/user';
+/* @flow */
+import * as userActionTypes from '../actions/user';
 
-export default function user(state = {}, action) {
+type State = {
+	user: { [string]: Array<number> },
+	category: string,
+	userAnswers: number
+};
+
+const initialDeckState = {};
+
+export default function user(state: State = initialDeckState, action: Object) {
 	switch (action.type) {
-		case GET_USER:
+		case userActionTypes.GET_USER:
 			return {
 				...state,
 				...action.user
 			};
-		case SUBMIT_USER_ANSWER:
+		case userActionTypes.SUBMIT_USER_ANSWER:
 			return {
 				...state,
 				[action.category]: {

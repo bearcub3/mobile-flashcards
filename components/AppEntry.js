@@ -103,7 +103,7 @@ const CardStackNav = () => (
 	</Stack.Navigator>
 );
 
-function AppEntry({ dispatch }) {
+function AppEntry({ dispatch }: Function) {
 	useEffect(() => {
 		dispatch(handleUsersData());
 	}, [dispatch]);

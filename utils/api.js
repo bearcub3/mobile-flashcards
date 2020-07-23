@@ -1,8 +1,9 @@
+/* @flow */
 import { _getDecksData, _getUsersData, _saveUserAnswer } from './data';
 import { AsyncStorage } from 'react-native';
 
-export const DEV_QUIZ_STORAGE_KEY = 'DEV_QUIZ:QUIZZES';
-export const USER_RECORD_STORAGE_KEY = 'USER_RECORD_STORAGE_KEY';
+export const DEV_QUIZ_STORAGE_KEY: string = 'DEV_QUIZ:QUIZZES';
+export const USER_RECORD_STORAGE_KEY: string = 'USER_RECORD_STORAGE_KEY';
 
 export function getInitalData() {
 	return Promise.all([_getDecksData(), _getUsersData()]).then(([decks, user]) => ({
@@ -11,15 +12,15 @@ export function getInitalData() {
 	}));
 }
 
-export function saveUserAnswer(info) {
+export function saveUserAnswer(info: { category: string, userAnswers: number }) {
 	return _saveUserAnswer(info);
 }
 
-export function setBasicDecks(decks) {
+export function setBasicDecks(decks: { [string]: Array<any>, ... }) {
 	return AsyncStorage.setItem(DEV_QUIZ_STORAGE_KEY, JSON.stringify(decks));
 }
 
-export function setUserRecord(user) {
+export function setUserRecord(user: { [string]: { userAnswers: Array<number> } }) {
 	return AsyncStorage.setItem(USER_RECORD_STORAGE_KEY, JSON.stringify(user));
 }
 
@@ -37,7 +38,7 @@ export function fetchUserData() {
 	});
 }
 
-export function submitNewDeck({ entry, key }) {
+export function submitNewDeck({ entry, key }: { entry: Array<any>, key: string }) {
 	return AsyncStorage.mergeItem(
 		DEV_QUIZ_STORAGE_KEY,
 		JSON.stringify({
@@ -46,7 +47,7 @@ export function submitNewDeck({ entry, key }) {
 	);
 }
 
-export function submitUserAnswer({ entry, key }) {
+export function submitUserAnswer({ entry, key }: { entry: number, key: string }) {
 	return AsyncStorage.mergeItem(
 		USER_RECORD_STORAGE_KEY,
 		JSON.stringify({
@@ -55,11 +56,11 @@ export function submitUserAnswer({ entry, key }) {
 	);
 }
 
-export function addCardData({ entry, key }) {
-	return AsyncStorage.mergeItem(
-		DEV_QUIZ_STORAGE_KEY,
-		JSON.stringify({
-			[key]: entry
-		})
-	);
-}
+// export function addCardData({ entry, key }) {
+// 	return AsyncStorage.mergeItem(
+// 		DEV_QUIZ_STORAGE_KEY,
+// 		JSON.stringify({
+// 			[key]: entry
+// 		})
+// 	);
+// }

@@ -181,17 +181,14 @@ const Container = styled.View`
 
 const Wrapper = styled.View`
 	background-color: ${colors.black};
-	padding-top: 30;
-	padding-bottom: 30;
-	padding-left: 30;
-	padding-right: 30;
-	border-radius: 20;
+	padding: 30px;
+	border-radius: 20px;
 	height: 600;
 `;
 
 const Pagination = styled.Text`
-	font-size: 15;
-	margin-bottom: 20;
+	font-size: 15px;
+	margin-bottom: 20px;
 	color: ${colors.white};
 `;
 
@@ -200,41 +197,38 @@ const Bold = styled.Text`
 `;
 
 const QuestionTitle = styled.Text`
-	font-size: 30;
+	font-size: 30px;
 	font-family: 'Roboto-Bold';
 	color: ${colors.white};
-	margin-bottom: 10;
+	margin-bottom: 10px;
 `;
 
 const QuestionText = styled.Text`
-	font-size: 20;
+	font-size: 20px;
 	font-weight: bold;
 	color: ${colors.white};
-	margin-bottom: 30;
+	margin-bottom: 30px;
 `;
 
 const Options = styled.TouchableOpacity`
 	background-color: ${colors.grey};
-	padding-top: 15;
-	padding-bottom: 15;
-	padding-left: 15;
-	padding-left: 15;
-	margin-bottom: 15;
-	border-radius: 10;
+	padding: 15px;
+	margin-bottom: 15px;
+	border-radius: 10px;
 `;
 
 const Answer = styled.TouchableOpacity`
 	align-self: center;
 	width: 300;
 	background-color: ${colors.blue};
-	padding-top: 15;
-	padding-bottom: 15;
-	margin-bottom: 15;
-	border-radius: 10;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-radius: 10px;
 `;
 
 const AnswerText = styled.Text`
-	font-size: 15;
+	font-size: 15px;
 	text-align: center;
 	color: ${colors.white};
 `;

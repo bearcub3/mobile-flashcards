@@ -38,47 +38,47 @@ function Decks({ totalDecks, decks, user, navigation: { navigate } }) {
 }
 
 const Landing = styled.View`
-	padding-top: 10;
+	padding-top: 10px;
 	align-items: center;
 	background-color: ${colors.black};
-	height: 220;
+	height: 220px;
 `;
 
 const Header = styled.Text`
 	font-family: 'Roboto-Regular';
-	font-size: 15;
+	font-size: 15px;
 	color: ${colors.white};
 `;
 
 const Intro = styled.Text`
 	font-family: 'Roboto-Bold';
-	font-size: 60;
+	font-size: 60px;
 	color: ${colors.white};
-	padding-top: 50;
-	padding-bottom: 10;
+	padding-top: 50px;
+	padding-bottom: 10px;
 `;
 
 const DeckContainer = styled.View`
-	margin-top: 50;
-	margin-left: 30;
-	margin-right: 30;
+	margin-top: 50px;
+	margin-left: 30px;
+	margin-right: 30px;
 `;
 
 const TotalDecks = styled.Text`
-	margin-bottom: 15;
-	font-size: 17;
+	margin-bottom: 15px;
+	font-size: 17px;
 	color: ${colors.black};
 `;
 
 const Card = styled.TouchableOpacity`
-	height: 200;
-	border-radius: 10;
+	height: 200px;
+	border-radius: 10px;
 	background-color: ${colors.blue};
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 30;
+	margin-bottom: 30px;
 	shadow-opacity: 0.5;
-	shadow-radius: 3;
+	shadow-radius: 3px;
 	shadow-color: ${colors.black};
 	shadow-offset: 3px 4px;
 `;
@@ -86,13 +86,13 @@ const Card = styled.TouchableOpacity`
 const Title = styled.Text`
 	font-family: 'Roboto-Regular';
 	color: ${colors.yellow};
-	font-size: 40;
-	margin-bottom: 10;
+	font-size: 40px;
+	margin-bottom: 10px;
 `;
 
 const CardsNumber = styled.Text`
 	color: ${colors.white};
-	font-size: 20;
+	font-size: 20px;
 `;
 
 const Bold = styled.Text`

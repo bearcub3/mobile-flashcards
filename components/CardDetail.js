@@ -48,30 +48,27 @@ const Container = styled.View`
 `;
 
 const CardCategory = styled.Text`
-	font-size: 50;
+	font-size: 50px;
 	font-family: 'Roboto-Bold';
 	color: ${colors.blue};
-	margin-bottom: 20;
+	margin-bottom: 20px;
 `;
 
 const TotalNumber = styled.Text`
-	font-size: 20;
+	font-size: 20px;
 `;
 
 const Button = styled.View`
 	align-items: center;
 	background-color: ${(props) => props.color};
-	border-radius: 10;
-	padding-top: 20;
-	padding-bottom: 20;
-	padding-left: 40;
-	padding-right: 40;
-	margin-top: 20;
+	border-radius: 10px;
+	padding: 20px 40px;
+	margin-top: 20px;
 `;
 
 const ButtonText = styled.Text`
 	color: ${colors.white};
-	font-size: 20;
+	font-size: 20px;
 `;
 
 const BoldText = styled.Text`

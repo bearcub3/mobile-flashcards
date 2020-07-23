@@ -34,7 +34,7 @@ function AddDeck({ dispatch }) {
 			<Title>Add A Deck</Title>
 			<Context>Name a techstack</Context>
 			<Context>you'd like to create quizzes!</Context>
-			<Input onChangeText={(text) => setValue(text)} value={value}></Input>
+			<Input onChangeText={(text: string) => setValue(text)} value={value}></Input>
 			<SubmitBtn onPress={submit} />
 		</CardWrapper>
 	);
@@ -42,7 +42,7 @@ function AddDeck({ dispatch }) {
 
 const CardWrapper = styled.View`
 	flex: 1;
-	border-radius: 10;
+	border-radius: 10px;
 	background-color: ${colors.yellow};
 	align-items: center;
 	justify-content: center;
@@ -50,40 +50,33 @@ const CardWrapper = styled.View`
 
 const Title = styled.Text`
 	color: ${colors.black};
-	font-size: 45;
+	font-size: 45px;
 	font-weight: bold;
-	margin-bottom: 20;
+	margin-bottom: 20px;
 `;
 
 const Context = styled.Text`
-	font-size: 18;
+	font-size: 18px;
 	text-align: center;
 `;
 
 const Input = styled.TextInput`
 	background-color: ${colors.white};
-	width: 350;
-	padding-top: 10;
-	padding-bottom: 10;
-	padding-left: 10;
-	padding-right: 10;
-	margin-top: 20;
-	margin-bottom: 50;
+	width: 350px;
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom: 50px;
 `;
 
 const SubmitButton = styled.TouchableOpacity`
 	background-color: ${colors.blue};
-	padding-top: 20;
-	padding-bottom: 20;
-	padding-left: 50;
-	padding-right: 50;
-	border-radius: 7;
-	margin-left: 40;
-	margin-right: 40;
+	padding: 20px 50px;
+	border-radius: 7px;
+	margin: 0 40px;
 `;
 
 const BtnText = styled.Text`
 	color: ${colors.white};
-	font-size: 20;
+	font-size: 20px;
 `;
 export default connect()(AddDeck);

@@ -1,14 +1,22 @@
-import { GET_DECKS, ADD_DECK } from '../actions/decks';
+/* @flow */
+import * as deckActionTypes from '../actions/decks';
 
-export default function decks(state = {}, action) {
+type State = {
+	decks: { [string]: Array<any>, ... },
+	deck: string
+};
+
+const initialDeckState = {};
+
+export default function decks(state: State = initialDeckState, action: Object) {
 	switch (action.type) {
-		case GET_DECKS:
+		case deckActionTypes.GET_DECKS:
 			return {
 				...state,
 				...action.decks
 			};
 
-		case ADD_DECK:
+		case deckActionTypes.ADD_DECK:
 			const { deck } = action;
 			return {
 				...state,

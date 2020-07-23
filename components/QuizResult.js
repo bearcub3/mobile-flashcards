@@ -65,55 +65,52 @@ const ModalContainer = styled.View`
 
 const ModalView = styled.View`
 	background-color: ${colors.white};
-	border-radius: 10;
-	padding-top: 20;
-	padding-bottom: 20;
-	padding-left: 20;
-	padding-right: 20;
+	border-radius: 10px;
+	padding: 20px;
 	align-items: center;
 	elevation: 5;
 `;
 
 const Title = styled.Text`
-	font-size: 60;
+	font-size: 60px;
 	font-weight: bold;
-	margin-bottom: 50;
+	margin-bottom: 50px;
 `;
 
 const ScoreBG = styled.View`
 	background-color: ${colors.blue};
-	border-radius: 270;
-	width: 270;
-	height: 270;
+	border-radius: 270px;
+	width: 270px;
+	height: 270px;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 50;
+	margin-bottom: 50px;
 `;
 
 const Score = styled.Text`
 	font-family: 'Roboto-Regular';
 	letter-spacing: -3;
-	font-size: 100;
+	font-size: 100px;
 	color: ${colors.white};
 `;
 
 const GradeRemark = styled.Text`
-	font-size: 40;
+	font-size: 40px;
 `;
 
 const Remark = styled.Text`
-	font-size: 30;
+	font-size: 30px;
 `;
 
 const CloseBTN = styled.TouchableHighlight`
-	width: 150;
+	width: 150px;
 	background-color: ${colors.black};
 	color: ${colors.white};
 	align-items: center;
-	padding-top: 20;
-	padding-bottom: 20;
-	border-radius: 10;
-	margin-top: 30;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-radius: 10px;
+	margin-top: 30px;
 `;
 
 function mapStateToProps({ decks, user }, { category }) {
