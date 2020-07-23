@@ -22,7 +22,7 @@
 		"ecmaVersion": 2018,
 		"sourceType": "module"
 	},
-	"plugins": ["react", "react-native", "eslint-plugin-react"],
+	"plugins": ["react", "react-native", "eslint-plugin-react", "prettier", "flowtype"],
 	"rules": {
 		"indent": ["error", 4],
 		"linebreak-style": ["error", "unix"],
