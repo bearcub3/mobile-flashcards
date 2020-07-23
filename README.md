@@ -35,3 +35,20 @@ I will need to add the similar module name option per directory. As I am a less 
 #### styled-component with React Native
 
 All the dimensions in React Native are unitless. So, we do not need to explicitly write the unit for any dimensions such as, width, height, font-size, etc. However, I realized that styled-component unit system doesn't really align with React Native regarding this matter. It seems to be quite controversial to some developers. But, without px unit, eslint keeps throwing loads of error messages. As a person who used so many different types of units for different use cases on the web, this really baffles me. Perhaps styled-component is not a great choice for mobile development after all? Even though `px` unit in css is density independent unit, then why does it work differently on the browsers? what about all the `rem`, `vw`, `%` and so on...? I may use `StyleSheet` API next time. Surprisingly, even with `px` units, everything looks identical on mobile.
+
+Android uses `dp`(density independent pixels) units to display elements uniformly on screens with different densities.
+
+    to calculate dp:
+    dp = (width in pixels * 160) / screen density
+
+and Android also has a `sp`(Scalable pixels) unit for fonts. It preserves a user's font setting and it displays the fonts according to the user's setting.
+
+On the other hand, iOS uses logical resolution which scales to the device's screen resolution.[reference](https://developer.apple.com/library/archive/documentation/DeviceInformation/Reference/iOSDeviceCompatibility/Displays/Displays.html)  
+When designing for iOS, use `pts`.  
+Without much experience in mobile development, my speculation is that all these units are device-dependent and after all React Native compiles those values according to device platforms.
+
+Discovery: Styled-components provides a library which let us force to omit the units with React Native. I don't like this approach with styled-component, tho.
+
+> For mobile development,
+
+    import styled from 'styled-components/native';

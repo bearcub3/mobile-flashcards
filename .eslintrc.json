@@ -1,5 +1,6 @@
 {
 	"env": {
+		"browser": true,
 		"es6": true,
 		"react-native/react-native": true
 	},
@@ -22,7 +23,7 @@
 		"ecmaVersion": 2018,
 		"sourceType": "module"
 	},
-	"plugins": ["react", "react-native", "eslint-plugin-react", "prettier", "flowtype"],
+	"plugins": ["react", "react-native", "import", "eslint-plugin-react", "prettier", "flowtype"],
 	"rules": {
 		"indent": ["error", 4],
 		"linebreak-style": ["error", "unix"],
