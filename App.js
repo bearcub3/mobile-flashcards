@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
@@ -15,7 +15,7 @@ import AppEntry from './components/AppEntry';
 
 const store = createStore<Object, any, any>(reducer, middlewares);
 
-const Container = styled(View)`
+const Container = styled.View`
 	flex: 1;
 	flex-flow: row wrap;
 	justify-content: flex-start;
