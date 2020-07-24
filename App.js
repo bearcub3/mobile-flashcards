@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react';
+import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -21,7 +21,7 @@ const Container = styled.View`
 	justify-content: flex-start;
 `;
 
-function App() {
+function App(props: {}): React.Node {
 	let [fontsLoaded] = useFonts<string | Object>({
 		'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
 		'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),

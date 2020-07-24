@@ -23,6 +23,7 @@ suppress_type=$FlowIssue
 
 module.name_mapper='^.\(.*\)$' -> '<PROJECT_ROOT>/utils/\1'
 module.name_mapper='^.\(.*\)$' -> '<PROJECT_ROOT>/reducers/\1'
+module.name_mapper='^.\(.*\)$' -> '<PROJECT_ROOT>/components/\1'
 
 [lints]
 untyped-type-import=warn

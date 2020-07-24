@@ -1,15 +1,6 @@
-/* @flow */
 import * as userActionTypes from '../actions/user';
 
-type State = {
-	user: { [string]: Array<number> },
-	category: string,
-	userAnswers: number
-};
-
-const initialDeckState = {};
-
-export default function user(state: State = initialDeckState, action: Object) {
+export default function user(state = {}, action) {
 	switch (action.type) {
 		case userActionTypes.GET_USER:
 			return {

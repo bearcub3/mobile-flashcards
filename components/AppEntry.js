@@ -44,7 +44,7 @@ const TabNavigation = () => (
 								color={color}
 							/>
 					  ))
-					: (icon = <MaterialIcons name="add" size={size} color={color} />);
+					: (icon = <MaterialIcons name="add" color={color} size={size} />);
 
 				return icon;
 			}
@@ -65,8 +65,8 @@ const TabNavigation = () => (
 			labelPosition: 'beside-icon'
 		}}
 	>
-		<TabType.Screen name="Decks" component={Decks} />
-		<TabType.Screen name="Add A Deck" component={AddDeck} />
+		<TabType.Screen name="Decks" component={Decks} size={30} />
+		<TabType.Screen name="Add A Deck" component={AddDeck} size={30} />
 	</TabType.Navigator>
 );
 

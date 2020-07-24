@@ -1,5 +1,7 @@
 # mobile-flashcards
 
+** Flow Type Checker will be halted until I complete submitting my project since I started coding with JavaScript, type checking is quite unfamiliar with me. I have done Redux typecheck part all wrong!!!!!! 😅 I realized that there are lots of React utility types I should aware of and lots of components consists with HOC and as this project uses Redux, type checker will be rather complicated to apply with my current code implementation for the time being and it will be a vast time consuming process. MY OH MY! hahah 😵 As this is my personal project, not intending to maintain the project with many people, Flow won't be necessary. But, it will be definately worth of learning to extend my knowldge to understand a typed language such as, Java 😂 or something else. **
+
 ## Flow : React Static Type Checker
 
 As we build an application, without type checking, there would be a possibility that we would end up producing many error-prone artefacts as the application gets bigger and more people to work at the same time. It means that you tell Flow how you want the codes to work explicitly and then whenever the code block runs somewhere in the application, the collaboration would be more efficient as we minimise the risk of the other developers misuse it and another benefit is that reducing the time for debugging as we don't have to figure out whether what type of data passes as props, parameters causes the error or something else.
