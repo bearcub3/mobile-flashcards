@@ -8,14 +8,19 @@ import { colors } from '../utils/theme';
 // Stack Navigation
 function CardDetail({ entryId, decks, resumePoint, navigation: { navigate } }) {
 	const currentValue = useRef();
-
 	return (
 		<Container>
 			<CardCategory>{entryId}</CardCategory>
 			<TotalNumber>
 				You have total <BoldText>{decks[entryId].length}</BoldText> cards.
 			</TotalNumber>
-			<TouchableOpacity onPress={() => navigate('AddCard')}>
+			<TouchableOpacity
+				onPress={() =>
+					navigate('AddCard', {
+						entryId: entryId
+					})
+				}
+			>
 				<Button color={colors.black}>
 					<ButtonText>Add Card</ButtonText>
 				</Button>

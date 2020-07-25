@@ -40,7 +40,7 @@ function QuizResult({ modalVisible, handleModal, category, totalScore, totalCard
 								handleModal(false);
 							}}
 						>
-							<Text style={{ color: `${colors.white}`, fontSize: `20` }}>
+							<Text style={{ color: `${colors.white}`, fontSize: 20 }}>
 								Close Modal
 							</Text>
 						</CloseBTN>

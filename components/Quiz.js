@@ -86,7 +86,9 @@ function Quiz({ dispatch, deck, category, answered }) {
 					}}
 					style={answered[index] === idx && { backgroundColor: `${colors.yellow}` }}
 				>
-					<Text style={{ fontSize: 16 }}>{option}</Text>
+					<Text style={{ fontSize: 16 }} key={option.question + idx}>
+						{option}
+					</Text>
 				</Options>
 			))}
 			<Answer
@@ -183,7 +185,7 @@ const Wrapper = styled.View`
 	background-color: ${colors.black};
 	padding: 30px;
 	border-radius: 20px;
-	height: 600;
+	height: 600px;
 `;
 
 const Pagination = styled.Text`
@@ -219,7 +221,7 @@ const Options = styled.TouchableOpacity`
 
 const Answer = styled.TouchableOpacity`
 	align-self: center;
-	width: 300;
+	width: 300px;
 	background-color: ${colors.blue};
 	padding-top: 15px;
 	padding-bottom: 15px;

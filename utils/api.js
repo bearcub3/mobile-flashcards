@@ -27,6 +27,7 @@ export function setUserRecord(user: { [string]: { userAnswers: Array<number> } }
 export function fetchDecksData() {
 	return AsyncStorage.getItem(DEV_QUIZ_STORAGE_KEY).then((results) => {
 		const data = JSON.parse(results);
+		console.log('WHY WHY WHY !!!!!!!!!!!', data);
 		return data;
 	});
 }
@@ -56,11 +57,23 @@ export function submitUserAnswer({ entry, key }: { entry: number, key: string })
 	);
 }
 
-// export function addCardData({ entry, key }) {
-// 	return AsyncStorage.mergeItem(
-// 		DEV_QUIZ_STORAGE_KEY,
-// 		JSON.stringify({
-// 			[key]: entry
-// 		})
-// 	);
-// }
+export function addCardData({
+	entryId,
+	question,
+	options,
+	answer
+}: {
+	entryId: string,
+	question: string,
+	options: Array<any>,
+	answer: number
+}) {
+	const obj = {
+		[entryId]: {
+			question,
+			options,
+			answer
+		}
+	};
+	return AsyncStorage.mergeItem(DEV_QUIZ_STORAGE_KEY, JSON.stringify(obj));
+}

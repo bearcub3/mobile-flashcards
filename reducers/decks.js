@@ -14,6 +14,18 @@ export default function decks(state = {}, action) {
 				...state,
 				[deck]: []
 			};
+		case deckActionTypes.ADD_CARD:
+			return {
+				...state,
+				[action.category]: [
+					...state[action.category],
+					{
+						question: action.question,
+						options: action.options,
+						answer: action.answer
+					}
+				]
+			};
 		default:
 			return state;
 	}
