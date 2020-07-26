@@ -6,7 +6,7 @@
 
         git clone git@github.com:bearcub3/mobile-flashcards.git
 
-2.  go to the directory you download my repository
+2.  go to the directory which contains my repository
 
         ex)  cd yourDirectory/mobile-flashcards
 
