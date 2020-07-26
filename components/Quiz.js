@@ -16,6 +16,8 @@ import { colors } from '../utils/theme';
 import { handleSaveUserAnswer } from '../actions/user';
 import { submitUserAnswer } from '../utils/api';
 
+import { clearLocalNotification, setLocalNotification } from '../utils/notification';
+
 import QuizResult from './QuizResult';
 
 function Quiz({ dispatch, deck, category, answered, goBack, goToDeck }) {
@@ -74,11 +76,13 @@ function Quiz({ dispatch, deck, category, answered, goBack, goToDeck }) {
 								userAnswers: idx
 							})
 						);
+
 						submitUserAnswer({ currentCategory, idx });
 
 						if (deck.length === answered.length + 1) {
 							setCompletion(!isCompleted);
 							handleModalVisiblity(!modalVisible);
+							clearLocalNotification().then(setLocalNotification);
 							return;
 						}
 
