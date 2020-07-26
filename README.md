@@ -1,6 +1,22 @@
 # mobile-flashcards
 
-** Flow Type Checker will be halted until I complete submitting my project since I started coding with JavaScript, type checking is quite unfamiliar with me. I have done Redux typecheck part all wrong!!!!!! 😅 I realized that there are lots of React utility types I should aware of and lots of components consists with HOC and as this project uses Redux, type checker will be rather complicated to apply with my current code implementation for the time being and it will be a vast time consuming process. MY OH MY! hahah 😵 As this is my personal project, not intending to maintain the project with many people, Flow won't be necessary. But, it will be definately worth of learning to extend my knowldge to understand a typed language such as, Java 😂 or something else. **
+## How To Start
+
+1.  Open your terminal and clone my repository
+
+        git clone git@github.com:bearcub3/mobile-flashcards.git
+
+2.  go to the directory you download my repository
+
+        ex)  cd yourDirectory/mobile-flashcards
+
+3.  Now you need to install all the dependencies
+
+        yarn
+
+4.  Once it's completed, run the app
+
+        expo start
 
 ## Flow : React Static Type Checker
 

@@ -120,6 +120,29 @@ export function _getUsersData() {
 	});
 }
 
+export function _resetUserAnswer({
+	category,
+	userAnswers
+}: {
+	category: string,
+	userAnswers: any
+}) {
+	return new Promise<void>((res, rej) => {
+		setTimeout(() => {
+			// call reducer
+			user = {
+				...user,
+				[category]: {
+					...user[category],
+					userAnswers: userAnswers
+				}
+			};
+
+			res();
+		}, 500);
+	});
+}
+
 export function _saveUserAnswer({
 	category,
 	userAnswers

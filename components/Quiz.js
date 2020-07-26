@@ -18,7 +18,7 @@ import { submitUserAnswer } from '../utils/api';
 
 import QuizResult from './QuizResult';
 
-function Quiz({ dispatch, deck, category, answered }) {
+function Quiz({ dispatch, deck, category, answered, goBack, goToDeck }) {
 	const screenWidth = Math.round(Dimensions.get('window').width);
 	const carousel = useRef();
 	const [currentCategory] = useState(category);
@@ -38,7 +38,7 @@ function Quiz({ dispatch, deck, category, answered }) {
 	}, [answered]);
 
 	const QuizDeck = ({ item, index }) => (
-		<Wrapper>
+		<Wrapper key={index + item.question}>
 			<Pagination>
 				Total <Bold>{index + 1}</Bold> of {deck.length} cards
 			</Pagination>
@@ -46,7 +46,7 @@ function Quiz({ dispatch, deck, category, answered }) {
 			<QuestionText>{item.question}</QuestionText>
 			{item.options.map((option, idx) => (
 				<Options
-					key={option.question}
+					key={option}
 					disabled={
 						(answered[index] !== undefined && true) || (answered[index] > idx && false)
 					}
@@ -86,9 +86,7 @@ function Quiz({ dispatch, deck, category, answered }) {
 					}}
 					style={answered[index] === idx && { backgroundColor: `${colors.yellow}` }}
 				>
-					<Text style={{ fontSize: 16 }} key={option.question + idx}>
-						{option}
-					</Text>
+					<Text style={{ fontSize: 16 }}>{option}</Text>
 				</Options>
 			))}
 			<Answer
@@ -158,19 +156,22 @@ function Quiz({ dispatch, deck, category, answered }) {
 				category={category}
 				handleModal={handleModalVisiblity}
 				modalVisible={modalVisible}
+				handleGoBack={goBack}
+				handleGoToDeck={goToDeck}
 			/>
 		</Container>
 	);
 }
 
-function mapStateToProps({ decks, user }, { route }) {
-	const { entryId, handleModal, modalVisible } = route.params;
+function mapStateToProps({ decks, user }, { route, navigation }) {
+	const { entryId } = route.params;
+
 	return {
 		category: entryId,
 		deck: decks[entryId],
 		answered: user[entryId].userAnswers,
-		handleModal,
-		modalVisible
+		goBack: navigation.goBack,
+		goToDeck: navigation
 	};
 }
 

@@ -1,5 +1,5 @@
 /* @flow */
-import { _getDecksData, _getUsersData, _saveUserAnswer } from './data';
+import { _getDecksData, _getUsersData, _saveUserAnswer, _resetUserAnswer } from './data';
 import { AsyncStorage } from 'react-native';
 
 export const DEV_QUIZ_STORAGE_KEY: string = 'DEV_QUIZ:QUIZZES';
@@ -16,6 +16,10 @@ export function saveUserAnswer(info: { category: string, userAnswers: number }) 
 	return _saveUserAnswer(info);
 }
 
+export function resetUserAnswers(info: { category: string, userAnswers: any }) {
+	return _resetUserAnswer(info);
+}
+
 export function setBasicDecks(decks: { [string]: Array<any>, ... }) {
 	return AsyncStorage.setItem(DEV_QUIZ_STORAGE_KEY, JSON.stringify(decks));
 }
@@ -27,7 +31,6 @@ export function setUserRecord(user: { [string]: { userAnswers: Array<number> } }
 export function fetchDecksData() {
 	return AsyncStorage.getItem(DEV_QUIZ_STORAGE_KEY).then((results) => {
 		const data = JSON.parse(results);
-		console.log('WHY WHY WHY !!!!!!!!!!!', data);
 		return data;
 	});
 }
@@ -35,6 +38,7 @@ export function fetchDecksData() {
 export function fetchUserData() {
 	return AsyncStorage.getItem(USER_RECORD_STORAGE_KEY).then((results) => {
 		const data = JSON.parse(results);
+		console.log('UPDATD USER DATA !!!!!!', data);
 		return data;
 	});
 }
@@ -76,4 +80,13 @@ export function addCardData({
 		}
 	};
 	return AsyncStorage.mergeItem(DEV_QUIZ_STORAGE_KEY, JSON.stringify(obj));
+}
+
+export function removeUserAnswer(key: string) {
+	return AsyncStorage.getItem(USER_RECORD_STORAGE_KEY).then((results) => {
+		const data = JSON.parse(results);
+		data[key] = undefined;
+		delete data[key];
+		AsyncStorage.setItem(USER_RECORD_STORAGE_KEY, JSON.stringify(data));
+	});
 }

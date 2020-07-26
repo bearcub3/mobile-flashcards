@@ -2,11 +2,12 @@ import React, { useRef } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { CommonActions } from '@react-navigation/native';
 
 import { colors } from '../utils/theme';
 
 // Stack Navigation
-function CardDetail({ entryId, decks, resumePoint, navigation: { navigate } }) {
+function CardDetail({ entryId, decks, resumePoint, navigation }) {
 	const currentValue = useRef();
 	return (
 		<Container>
@@ -16,7 +17,7 @@ function CardDetail({ entryId, decks, resumePoint, navigation: { navigate } }) {
 			</TotalNumber>
 			<TouchableOpacity
 				onPress={() =>
-					navigate('AddCard', {
+					navigation.navigate('AddCard', {
 						entryId: entryId
 					})
 				}
@@ -26,11 +27,11 @@ function CardDetail({ entryId, decks, resumePoint, navigation: { navigate } }) {
 				</Button>
 			</TouchableOpacity>
 			<TouchableOpacity
-				onPress={() =>
-					navigate('StartQuiz', {
+				onPress={() => {
+					navigation.navigate('StartQuiz', {
 						entryId: entryId
-					})
-				}
+					});
+				}}
 			>
 				<Button color={colors.blue}>
 					<ButtonText ref={currentValue}>
@@ -80,7 +81,7 @@ const BoldText = styled.Text`
 	font-weight: bold;
 `;
 
-function mapStateToProps({ decks, user }, { route }) {
+function mapStateToProps({ decks, user, dispatch }, { route, navigation }) {
 	const { entryId } = route.params;
 	return {
 		entryId,

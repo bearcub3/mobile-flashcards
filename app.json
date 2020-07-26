@@ -1,12 +1,15 @@
 {
-  "name": "mobile-flashcards",
-  "displayName": "mobile-flashcards",
-  "expo": {
-    "name": "mobile-flashcards",
-    "slug": "mobile-flashcards",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  }
+	"name": "mobile-flashcards",
+	"displayName": "mobile-flashcards",
+	"orientation": "portrait",
+	"description": "My first mobile developer quiz app",
+	"expo": {
+		"name": "mobile-flashcards",
+		"slug": "mobile-flashcards",
+		"version": "1.0.0",
+		"assetBundlePatterns": ["**/*"],
+		"android": {
+			"useNextNotificationsApi": true
+		}
+	}
 }

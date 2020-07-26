@@ -2,14 +2,41 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableHighlight, Alert, Modal } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { CommonActions } from '@react-navigation/native';
 
 import { colors } from '../utils/theme';
+import { handleSaveUserAnswer, handleResetUserAnswer } from '../actions/user';
+import { submitUserAnswer, removeUserAnswer } from '../utils/api';
 
-function QuizResult({ modalVisible, handleModal, category, totalScore, totalCards }) {
+function QuizResult({
+	dispatch,
+	modalVisible,
+	handleModal,
+	category,
+	totalScore,
+	totalCards,
+	handleGoBack,
+	handleGoToDeck
+}) {
 	const scoreCalculation = () => {
 		return (100 / totalCards) * totalScore;
 	};
+
+	const reset = () => {
+		dispatch(
+			handleResetUserAnswer({
+				category: category,
+				userAnswers: []
+			})
+		);
+		removeUserAnswer(category);
+	};
+
 	const [userScore, setScore] = useState(scoreCalculation());
+
+	useEffect(() => {
+		setScore(scoreCalculation());
+	}, [totalScore]);
 
 	return (
 		<Wrapper>
@@ -35,15 +62,34 @@ function QuizResult({ modalVisible, handleModal, category, totalScore, totalCard
 								: 'Good Effort'}
 						</GradeRemark>
 						<Remark>{`You have got ${totalScore} out of ${totalCards}!!`}</Remark>
-						<CloseBTN
-							onPress={() => {
-								handleModal(false);
+						<View
+							style={{
+								flexDirection: `row`
 							}}
 						>
-							<Text style={{ color: `${colors.white}`, fontSize: 20 }}>
-								Close Modal
-							</Text>
-						</CloseBTN>
+							<BTN
+								bgcolor={colors.darkPurple}
+								onPress={() => {
+									reset();
+									handleGoBack();
+								}}
+							>
+								<Text style={{ color: `${colors.white}`, fontSize: 17 }}>
+									Restart
+								</Text>
+							</BTN>
+							<BTN
+								bgcolor={colors.grey}
+								onPress={() => {
+									handleModal(false);
+									handleGoToDeck.navigate({ name: 'Decks' });
+								}}
+							>
+								<Text style={{ color: `${colors.black}`, fontSize: 17 }}>
+									Go to Decks
+								</Text>
+							</BTN>
+						</View>
 					</ModalView>
 				</ModalContainer>
 			</Modal>
@@ -89,7 +135,7 @@ const ScoreBG = styled.View`
 
 const Score = styled.Text`
 	font-family: 'Roboto-Regular';
-	letter-spacing: -3;
+	letter-spacing: -3px;
 	font-size: 100px;
 	color: ${colors.white};
 `;
@@ -102,22 +148,25 @@ const Remark = styled.Text`
 	font-size: 30px;
 `;
 
-const CloseBTN = styled.TouchableHighlight`
+const BTN = styled.TouchableHighlight`
 	width: 150px;
-	background-color: ${colors.black};
+	height: 60px;
+	background-color: ${(props) => props.bgcolor};
 	color: ${colors.white};
 	align-items: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	border-radius: 10px;
 	margin-top: 30px;
+	margin-left: 10px;
 `;
 
 function mapStateToProps({ decks, user }, { category }) {
-	const userAnswer = user[category];
+	const userAnswer = user[category].userAnswers;
 	const correctAnswer = decks[category].map((item) => item.answer);
+
 	return {
-		totalScore: correctAnswer.filter((a, idx) => userAnswer[idx] !== a).length,
+		totalScore: correctAnswer.filter((a, idx) => a == userAnswer[idx]).length,
 		totalCards: correctAnswer.length
 	};
 }

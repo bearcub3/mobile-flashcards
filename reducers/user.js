@@ -15,6 +15,14 @@ export default function user(state = {}, action) {
 					userAnswers: state[action.category].userAnswers.concat([action.userAnswers])
 				}
 			};
+		case userActionTypes.RESET_USER_ANSWER:
+			return {
+				...state,
+				[action.category]: {
+					...state[action.category],
+					userAnswers: action.userAnswers
+				}
+			};
 		default:
 			return state;
 	}
