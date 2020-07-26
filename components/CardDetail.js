@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { CommonActions } from '@react-navigation/native';
 
 import { colors } from '../utils/theme';
 
