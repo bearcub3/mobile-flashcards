@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { CommonActions } from '@react-navigation/native';
 
 import { submitNewDeck } from '../utils/api';
 import { addDeck } from '../actions/decks';
@@ -14,9 +15,13 @@ const SubmitBtn = ({ onPress }) => (
 	</SubmitButton>
 );
 
-function AddDeck({ dispatch }) {
+function AddDeck({ dispatch, navigation }) {
 	const [value, setValue] = useState('');
 	const entry = new Array(1);
+
+	const moveToDecks = () => {
+		navigation.navigate({ name: 'Decks' });
+	};
 
 	const submit = () => {
 		dispatch(addDeck(value));
@@ -24,7 +29,15 @@ function AddDeck({ dispatch }) {
 		Alert.alert(
 			'Add a Deck',
 			`${value} has been added to the decks`,
-			[{ text: 'OK', onPress: () => setValue('') }],
+			[
+				{
+					text: 'OK',
+					onPress: () => {
+						setValue('');
+						moveToDecks();
+					}
+				}
+			],
 			{ cancelable: false }
 		);
 	};
@@ -79,4 +92,5 @@ const BtnText = styled.Text`
 	color: ${colors.white};
 	font-size: 20px;
 `;
+
 export default connect()(AddDeck);
