@@ -4,9 +4,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import styled from 'styled-components/native';
 
-import { useFonts } from 'expo-font';
-import { AppLoading } from 'expo';
-
 import reducer from './reducers';
 import middlewares from './middlewares';
 
@@ -21,21 +18,9 @@ const Container = styled.View`
 `;
 
 function App() {
-	let [fontsLoaded] = useFonts({
-		'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
-		'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
-		'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf')
-	});
-
-	if (!fontsLoaded) {
-		return <AppLoading />;
-	}
-
 	return (
 		<Provider store={store}>
-			<Container>
-				<AppEntry />
-			</Container>
+			<AppEntry />
 		</Provider>
 	);
 }

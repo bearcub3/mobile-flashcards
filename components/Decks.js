@@ -4,16 +4,8 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { colors } from '../utils/theme';
-import { setBasicDecks, fetchDecksData, setUserRecord, fetchUserData } from '../utils/api';
 
 function Decks({ totalDecks, decks, user, navigation: { navigate } }) {
-	useEffect(() => {
-		setBasicDecks({ decks });
-		fetchDecksData();
-		setUserRecord({ user });
-		fetchUserData();
-	}, [decks, user]);
-
 	return (
 		<ScrollView style={{ backgroundColor: `${colors.white}` }} stickyHeaderIndices={[0]}>
 			<Landing>

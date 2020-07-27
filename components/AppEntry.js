@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, SafeAreaView, StatusBar, Platform, AsyncStorage } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -6,9 +6,12 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Constants from 'expo-constants';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
 
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
+import { setBasicDecks, fetchDecksData, setUserRecord, fetchUserData } from '../utils/api';
 import { handleUsersData } from '../actions';
 import { colors } from '../utils/theme';
 
@@ -97,16 +100,30 @@ const CardStackNav = () => (
 			component={Quiz}
 			options={{
 				headerTintColor: colors.white,
-				headerStyle: { backgroundColor: colors.blue }
+				headerStyle: { backgroundColor: colors.black }
 			}}
 		/>
 	</Stack.Navigator>
 );
 
-function AppEntry({ dispatch }: Function) {
+function AppEntry({ dispatch, decks, user }: Function) {
+	let [fontsLoaded] = useFonts({
+		'Roboto-Bold': require('../assets/fonts/Roboto-Bold.ttf'),
+		'Roboto-Regular': require('../assets/fonts/Roboto-Regular.ttf'),
+		'Roboto-Light': require('../assets/fonts/Roboto-Light.ttf')
+	});
+
 	useEffect(() => {
+		fetchDecksData();
+		fetchUserData();
+		setBasicDecks({ decks });
+		setUserRecord({ user });
 		dispatch(handleUsersData());
-	}, [dispatch]);
+	}, [decks, user]);
+
+	if (!fontsLoaded) {
+		return <AppLoading />;
+	}
 
 	return (
 		<NavigationContainer>

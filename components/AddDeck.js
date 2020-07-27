@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';

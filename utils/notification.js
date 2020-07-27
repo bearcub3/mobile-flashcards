@@ -9,10 +9,8 @@ export function setLocalNotification() {
 	AsyncStorage.getItem(NOTIFICATION_KEY)
 		.then(JSON.parse)
 		.then((data) => {
-			console.log('CHECKING IF THE DATA DOES EXIST', data);
 			if (data === null) {
 				Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
-					console.log('WHAT STATUS I AM IN', status);
 					if (status === 'granted') {
 						Notifications.cancelAllScheduledNotificationsAsync();
 
