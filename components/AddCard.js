@@ -10,7 +10,7 @@ import { colors } from '../utils/theme';
 import { addCard } from '../actions/decks';
 import { addCardData } from '../utils/api';
 
-function AddCard({ entryId, dispatch }) {
+function AddCard({ entryId, dispatch, goBack }) {
 	const [questionInput, setQuestion] = useState('');
 	const [firstOption, setFirstOption] = useState('');
 	const [secondOption, setSecondOption] = useState('');
@@ -70,6 +70,7 @@ function AddCard({ entryId, dispatch }) {
 			options: [firstOption, secondOption, thirdOption, fourthOption],
 			answer: selectedValue - 1
 		});
+		goBack();
 	};
 
 	const refRBSheet = useRef();
@@ -102,7 +103,8 @@ function AddCard({ entryId, dispatch }) {
 							opacity: checkInput(index).length > 0 ? 1 : 0
 						}}
 					/>
-				</Wrapper>
+				</Wrap
+				per>
 			))}
 			<PickerContainer>
 				<Button
@@ -211,10 +213,11 @@ const AnswerPicker = styled.Picker`
 	justify-content: center;
 `;
 
-function mapStateToProps({ decks, user }, { route }) {
+function mapStateToProps({ decks, user }, { route, navigation }) {
 	const { entryId } = route.params;
 	return {
-		entryId
+		entryId,
+		goBack: navigation.goBack
 	};
 }
 
