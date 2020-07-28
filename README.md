@@ -1,5 +1,10 @@
 # mobile-flashcards
 
+Passed the assessment 💪💪! All the react assesments within 2 months! yay! 🏅
+A reviewer recommended me to start with TypeScript, not Flow. 😂 
+That seems to be a way to go. To be fair, most of libraries are written with it and lots of companies use it. 
+Anyway, I am a happy bunny just for now!  🤓
+
 ## How To Start
 
 1.  Open your terminal and clone my repository
